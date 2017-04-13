@@ -1,16 +1,9 @@
-FROM gradle:alpine
+FROM gradle:jdk8
 
 USER root
 ENV ANDROID_HOME /opt/android-sdk
-
-RUN apk update \                                                                                                                                                                                                                        
-  && apk add ca-certificates wget openssl expect \
-  && update-ca-certificates \
-  && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 RUN mkdir ${ANDROID_HOME} && chown gradle:gradle ${ANDROID_HOME}
 
-# https://developer.android.com/studio/releases/sdk-tools.html
 ENV SDK_VERSION 26.0.1
 ENV TOOLS_VERSION 25.2.5
 ENV PLATFORM_VERSION 25
@@ -22,15 +15,6 @@ RUN cd ${ANDROID_HOME} && wget -O android-sdk.zip https://dl.google.com/android/
 
 RUN cd ${ANDROID_HOME} \
  && yes | tools/bin/sdkmanager "tools" "platforms;android-23" "build-tools;25.0.0" "build-tools;25.0.1" "extras;android;m2repository"
-
-# RUN echo "no" | android create avd \
-#  --force \
-#  --device "Nexus 5" \
-#  --name test \
-#  --target android-21 \
-#  --abi armeabi-v7a \
-#  --skin WVGA800 \
-#  --sdcard 512M
 
 USER gradle
 ENV ANDROID_HOME /opt/android-sdk
