@@ -21,7 +21,7 @@ RUN cd ${ANDROID_HOME} && wget -O android-sdk.zip https://dl.google.com/android/
  && rm -f android-sdk.zip 
 
 RUN cd ${ANDROID_HOME} \
- && yes | tools/bin/sdkmanager "tools" "platforms;android-${PLATFORM_VERSION}"
+ && yes | tools/bin/sdkmanager "tools"
 
 # RUN echo "no" | android create avd \
 #  --force \
