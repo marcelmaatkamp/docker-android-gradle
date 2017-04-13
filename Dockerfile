@@ -21,16 +21,17 @@ RUN cd /opt && wget -O android-sdk.zip https://dl.google.com/android/repository/
 RUN cd /opt \
  && yes | tools/bin/sdkmanager "tools" "platforms;android-${PLATFORM_VERSION}"
 
+# RUN echo "no" | android create avd \
+#  --force \
+#  --device "Nexus 5" \
+#  --name test \
+#  --target android-21 \
+#  --abi armeabi-v7a \
+#  --skin WVGA800 \
+#  --sdcard 512M
+
 USER gradle
 ENV ANDROID_HOME /opt
 ENV PATH ${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}
-RUN echo "no" | android create avd \
-                --force \
-                --device "Nexus 5" \
-                --name test \
-                --target android-21 \
-                --abi armeabi-v7a \
-                --skin WVGA800 \
-                --sdcard 512M
 
 CMD ["gradle", "installDebug"]
