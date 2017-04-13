@@ -21,7 +21,7 @@ RUN cd ${ANDROID_HOME} && wget -O android-sdk.zip https://dl.google.com/android/
  && rm -f android-sdk.zip 
 
 RUN cd ${ANDROID_HOME} \
- && yes | tools/bin/sdkmanager "tools" "platforms;android-23" "build-tools;25.0.1" "extras;android;m2repository"
+ && yes | tools/bin/sdkmanager "tools" "platforms;android-23" "build-tools;25.0.0" "build-tools;25.0.1" "extras;android;m2repository"
 
 # RUN echo "no" | android create avd \
 #  --force \
@@ -36,4 +36,5 @@ USER gradle
 ENV ANDROID_HOME /opt/android-sdk
 ENV PATH ${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}
 
+WORKDIR /opt/workspace
 CMD ["gradle", "installDebug"]
