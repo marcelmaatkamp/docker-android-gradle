@@ -21,7 +21,7 @@ RUN cd ${ANDROID_HOME} && wget -O android-sdk.zip https://dl.google.com/android/
  && rm -f android-sdk.zip 
 
 RUN cd ${ANDROID_HOME} \
- && yes | tools/bin/sdkmanager "tools" "platforms;android-23" 
+ && yes | tools/bin/sdkmanager "tools" "platforms;android-23" "build-tools;25.0.1" "extras;android;m2repository"
 
 # RUN echo "no" | android create avd \
 #  --force \
